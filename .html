@@ -1,44 +1,8 @@
 <!DOCTYPE html>
 <head>
     <title>Random Matrix Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+    <link rel="stylesheet" type="text/css" href=".css">
 
-        .input{
-            position: absolute;
-            top: 20px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .matrix {
-            margin-top: 20px;
-        }
-
-        table {
-            border-collapse: collapse;
-            border: 2px solid black; 
-        }
-
-        td {
-            padding: 10px;
-            text-align: center;
-        }
-
-        .special-matrix {
-            display: none;
-            margin-top: 20px;
-        }
-
-    </style>
 </head>
 <body>
 
@@ -56,16 +20,20 @@
         <div class="special-matrix" id="special-matrix">
             <h3>Select Special Matrix Type</h3>
             <select id="matrix-type">
+                <option id="default" disabled selected> -- select an option -- </option>
                 <option value="row-matrix" id="row-matrix">Row Matrix</option>
                 <option value="column-matrix" id="column-matrix">Column Matrix</option>
                 <option value="rectangular-matrix" id="rectangular-matrix">Rectangular Matrix</option>
+                <option value="identity-matrix" id="identity-matrix">Identity Matrix</option>
+                <option value="upper-matrix" id="upper-matrix">Upper Triangular Matrix</option>
             </select><br><br>
 
             <button onclick="generateMatrix()">Generate Matrix</button>
         </div>
+        <center><div class="matrix" id="matrix"></div></center>
     </div>
 
-    <div class="matrix" id="matrix"></div>
+    
 
     <script>
         function matrixTypes() {
@@ -80,7 +48,10 @@
                 document.getElementById('row-matrix').style.display = (rows === 1) ? 'block' : 'none';
                 document.getElementById('column-matrix').style.display = (cols === 1) ? 'block' : 'none';
                 document.getElementById('rectangular-matrix').style.display = (rows !== cols) ? 'block' : 'none';
+                document.getElementById('identity-matrix').style.display = (rows !== 1 && cols !== 1 && rows == cols) ? 'block' : 'none';
+                document.getElementById('upper-matrix').style.display = (rows !== 1 && cols !== 1 && rows == cols) ? 'block' : 'none';
             } 
+            document.getElementById('default').selected = true;
         }
 
         function generateMatrix() {
@@ -94,10 +65,12 @@
 
             for (let i = 0; i < rows; i++) {
                 table += '<tr>';
-                for (let j = 0; j < cols; j++) {
+                for (let j = 0; j < cols+2; j++) {
                     let value;
-
-                    switch (matrixType1) {
+                    //NOTE SA 1 MAGSTASTART YUNG NUMBERS KASI MAY ADDITIONAL 2 COLUMNS PARA SA BRACKET
+                    if(j != 0 && j != cols+1)
+                    {
+                        switch (matrixType1) {
                         case 'row-matrix':
                             value = (rows === 1) ? Math.floor(Math.random() * 100) : 0;
                             break;
@@ -107,11 +80,59 @@
                         case 'rectangular-matrix':
                             value = Math.floor(Math.random() * 100);
                             break;
+                        case 'identity-matrix':
+                            if(i+1 == j){
+                                value = Math.floor(Math.random() * 100);
+                            }
+                            else{
+                                value = 0;
+                            }
+                            break;
+                        case 'upper-matrix':
+                            if(j < i+1)
+                            {
+                                value = 0;
+                            }
+                            else{
+                                value = Math.floor(Math.random() * 100);
+                            }
+                            break;
                         default:
                             value = Math.floor(Math.random() * 100);
+                        }
+                        table += `<td>${value}</td>`;
                     }
-
-                    table += `<td>${value}</td>`;
+                    //If only one row
+                    else if(j == 0 && rows == 1)
+                    {
+                        table += `<td style="border-top: 3px solid black;border-left: 3px solid black; border-bottom: 3px solid black"></td>`;
+                    }
+                    else if(j == cols+1 && rows == 1)
+                    {
+                        table += `<td style="border-top: 3px solid black; border-right: 3px solid black; border-bottom: 3px solid black"></td>`;
+                    }
+                    //For Left Side
+                    else if(j==0 && i==0){
+                        table += `<td style="border-top: 3px solid black;border-left: 3px solid black;"></td>`;
+                    }
+                    else if(j==0 && i != 0 && i != rows-1){
+                        table += `<td style="border-left: 3px solid black"></td>`;
+                    }
+                    else if (j==0 && i == rows-1)
+                    {
+                        table += `<td style="border-bottom: 3px solid black;border-left: 3px solid black"></td>`;
+                    }
+                    //For Right Side
+                    else if(j== cols+1 && i== 0){
+                        table += `<td style="border-top: 3px solid black;border-right: 3px solid black"></td>`;
+                    }
+                    else if (j== cols+1 && i == rows-1)
+                    {
+                        table += `<td style="border-bottom: 3px solid black;border-right: 3px solid black"></td>`;
+                    }
+                    else if(j== cols+1 && i !=0 && j != rows){
+                        table += `<td style="border-right: 3px solid black"></td>`;
+                    }
                 }
                 table += '</tr>';
             }
