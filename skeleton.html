@@ -30,6 +30,8 @@
                 <option value="scalar-matrix" id="scalar-matrix">Scalar Matrix</option>
                 <option value="identity-matrix" id="identity-matrix">Identity Matrix</option>
                 <option value="upper-matrix" id="upper-matrix">Upper Triangular Matrix</option>
+                <option value="zero-matrix" id="zero-matrix">Zero Matrix</option>
+                <option value="lower-matrix" id="lower-matrix">Lower Triangular Matrix</option>
             </select><br><br>
 
             <button onclick="generateMatrix()">Generate Matrix</button>
@@ -58,6 +60,8 @@
                 document.getElementById('scalar-matrix').style.display = (rows === cols) ? 'block' : 'none';
                 document.getElementById('identity-matrix').style.display = (rows !== 1 && cols !== 1 && rows == cols) ? 'block' : 'none';
                 document.getElementById('upper-matrix').style.display = (rows !== 1 && cols !== 1 && rows == cols) ? 'block' : 'none';
+                document.getElementById('lower-matrix').style.display = (rows !== 1 && cols !== 1 && rows === cols) ? 'block' : 'none';
+                document.getElementById('zero-matrix').style.display = (rows > 0 && cols > 0) ? 'block' : 'none';
             }
             document.getElementById('default').selected = true;
         }
@@ -116,6 +120,17 @@
                                     value = Math.floor(Math.random() * 100);
                                 }
                                 break;
+                            case 'zero-matrix':
+                                value = 0; 
+                                break;
+                            case 'lower-matrix':
+                                if (i < j - 1) {
+                                    value = 0;
+                                }
+                                else {
+                                    value = Math.floor(Math.random() * 100);
+                                }
+                                    break;
                             default:
                                 value = Math.floor(Math.random() * 100);
                         }
