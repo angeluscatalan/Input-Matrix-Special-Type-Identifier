@@ -97,7 +97,7 @@
                             case 'scalar-matrix':
                                 if (i === j - 1) {
                                     if (i === 0) {
-                                        window.scalarValue = Math.floor(Math.random() * 100);
+                                        window.scalarValue = Math.floor(Math.random() * 99) + 2;
                                     }
                                     value = window.scalarValue;
                                 } else {
@@ -117,11 +117,11 @@
                                     value = 0;
                                 }
                                 else {
-                                    value = Math.floor(Math.random() * 100);
+                                    value = Math.floor(Math.random() * 100) + 1;
                                 }
                                 break;
                             case 'zero-matrix':
-                                value = 0; 
+                                value = 0;
                                 break;
                             case 'lower-matrix':
                                 if (i < j - 1) {
@@ -133,7 +133,7 @@
                                 else {
                                     value = Math.floor(Math.random() * 100);
                                 }
-                                    break;
+                                break;
                             default:
                                 value = Math.floor(Math.random() * 100);
                         }
