@@ -1,11 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Random Matrix Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .input{
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .matrix {
+            margin-top: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 2px solid black; 
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .special-matrix {
+            display: none;
+            margin-top: 20px;
+        }
+
+    </style>
 </head>
 <body>
+
+    <div class="input">
+        <h1>Random Matrix Generator</h1>
+
+        <label for="rows">Enter number of rows: </label>
+        <input type="number" id="rows" min="1"><br><br>
+
+        <label for="cols">Enter number of columns: </label>
+        <input type="number" id="cols" min="1"><br><br>
+
+        <button onclick="matrixTypes()">Matrix Types</button>
+
+        <div class="special-matrix" id="special-matrix">
+            <h3>Select Special Matrix Type</h3>
+            <select id="matrix-type">
+                <option value="row-matrix" id="row-matrix">Row Matrix</option>
+                <option value="column-matrix" id="column-matrix">Column Matrix</option>
+                <option value="rectangular-matrix" id="rectangular-matrix">Rectangular Matrix</option>
+            </select><br><br>
+
+            <button onclick="generateMatrix()">Generate Matrix</button>
+        </div>
+    </div>
+
+    <div class="matrix" id="matrix"></div>
+
+    <script>
+        function matrixTypes() {
+            var rows = parseInt(document.getElementById('rows').value);
+            var cols = parseInt(document.getElementById('cols').value);
+            var matrixType2 = document.getElementById('special-matrix');
+            var matrixDiv = document.getElementById('matrix');
+            matrixDiv.innerHTML = '';
+
+            if (rows && cols) {
+                matrixType2.style.display = 'block';
+                document.getElementById('row-matrix').style.display = (rows === 1) ? 'block' : 'none';
+                document.getElementById('column-matrix').style.display = (cols === 1) ? 'block' : 'none';
+                document.getElementById('rectangular-matrix').style.display = (rows !== cols) ? 'block' : 'none';
+            } 
+        }
+
+        function generateMatrix() {
+            var rows = parseInt(document.getElementById('rows').value);
+            var cols = parseInt(document.getElementById('cols').value);
+            var  matrixType1 = document.getElementById('matrix-type').value;
+            var  matrixDiv = document.getElementById('matrix');
+            matrixDiv.innerHTML = ''; 
+
+            let table = '<table>';
+
+            for (let i = 0; i < rows; i++) {
+                table += '<tr>';
+                for (let j = 0; j < cols; j++) {
+                    let value;
+
+                    switch (matrixType1) {
+                        case 'row-matrix':
+                            value = (rows === 1) ? Math.floor(Math.random() * 100) : 0;
+                            break;
+                        case 'column-matrix':
+                            value = (cols === 1) ? Math.floor(Math.random() * 100) : 0;
+                            break;
+                        case 'rectangular-matrix':
+                            value = Math.floor(Math.random() * 100);
+                            break;
+                        default:
+                            value = Math.floor(Math.random() * 100);
+                    }
+
+                    table += `<td>${value}</td>`;
+                }
+                table += '</tr>';
+            }
+
+            table += '</table>';
+            matrixDiv.innerHTML = table;
+        }
+    </script>
 
 </body>
 </html>
