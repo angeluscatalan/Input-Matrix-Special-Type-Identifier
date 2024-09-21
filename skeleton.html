@@ -127,6 +127,9 @@
                                 if (i < j - 1) {
                                     value = 0;
                                 }
+                                else if (i + 1 == j) {
+                                    value = Math.floor(Math.random() * 100) + 1;
+                                }
                                 else {
                                     value = Math.floor(Math.random() * 100);
                                 }
