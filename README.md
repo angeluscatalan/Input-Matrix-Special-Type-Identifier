@@ -23,9 +23,15 @@ Upper Triangular Matrix: A square matrix where all elements below the main diago
 
 Lower Triangular Matrix: A square matrix where all elements above the main diagonal are zero.
 
-HOW TO USE:
+HOW TO USE
 
-Input Dimensions:
-1. Enter the number of rows and columns to create a matrix of your desired size.
-2. Select Matrix Type: After providing the dimensions, you can select the matrix type you want from the list of supported matrix types.
-4. Matrix Generation: The program will generate the matrix based on the selected type, ensuring that the matrix follows the rules of the chosen matrix type.
+1. Select Matrix Type:
+First, choose the type of matrix you want to generate from the list of available matrix types. The program will ensure that the matrix you generate meets the criteria for the selected type.
+
+
+2. Input Dimensions:
+After selecting the matrix type, enter the number of rows and columns. Depending on the matrix type you selected, the program will validate whether the entered dimensions are valid for that type. For example, a square matrix requires equal rows and columns, while a row matrix needs exactly one row.
+
+
+3. Matrix Generation:
+Once the dimensions are entered, the program will generate and display the matrix based on the selected type. It will ensure the matrix follows the rules for the chosen type, such as filling diagonal elements for identity and scalar matrices or making off-diagonal elements zero for triangular matrices.
