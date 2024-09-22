@@ -1,7 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +14,8 @@ body {
 }
 
 .container {
-    width: 1000px;
+    min-width: 1000px;
+    width: auto;
     margin: 0 auto; 
     padding: 20px;
     background-color: rgba(59, 59, 105, 0.3);
@@ -43,7 +45,6 @@ body {
     justify-content: center;
     margin-top: 20px;
     overflow: auto;
-    max-width: 800px;
 }
 
 .matrix div {
@@ -172,4 +173,8 @@ select {
     text-align: center;
     white-space: pre;
     font-family: 'Courier New', Courier, monospace; 
+}
+
+table{
+    border-collapse: collapse;
 }

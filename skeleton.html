@@ -36,15 +36,15 @@
             <div class="generate-container">
                 <select id="matrix-type">
                     <option id="default" disabled selected> -- select an option -- </option>
-                    <option value="row-matrix">Row Matrix</option>
-                    <option value="column-matrix">Column Matrix</option>
-                    <option value="rectangular-matrix">Rectangular Matrix</option>
-                    <option value="square-matrix">Square Matrix</option>
-                    <option value="scalar-matrix">Scalar Matrix</option>
-                    <option value="identity-matrix">Identity Matrix</option>
-                    <option value="upper-matrix">Upper Triangular Matrix</option>
-                    <option value="zero-matrix">Zero Matrix</option>
-                    <option value="lower-matrix">Lower Triangular Matrix</option>
+                    <option value="row-matrix" id="row-matrix">Row Matrix</option>
+                    <option value="column-matrix" id="column-matrix">Column Matrix</option>
+                    <option value="rectangular-matrix" id="rectangular-matrix">Rectangular Matrix</option>
+                    <option value="square-matrix" id="square-matrix">Square Matrix</option>
+                    <option value="scalar-matrix" id="scalar-matrix">Scalar Matrix</option>
+                    <option value="identity-matrix" id="identity-matrix">Identity Matrix</option>
+                    <option value="upper-matrix" id="upper-matrix">Upper Triangular Matrix</option>
+                    <option value="zero-matrix" id="zero-matrix">Zero Matrix</option>
+                    <option value="lower-matrix" id="lower-matrix">Lower Triangular Matrix</option>
                 </select>
                 <button onclick="generateMatrix()">Generate Matrix</button>
             </div>
@@ -53,6 +53,7 @@
         <center>
             <div class="matrix-container" id="matrix-container">
                 <div class="matrix" id="matrix"></div>
+                <div class="matrix" id="equation"></div>
             </div>
         </center>
     </div>
@@ -78,9 +79,13 @@
                 document.getElementById('zero-matrix').style.display = (rows > 0 && cols > 0) ? 'block' : 'none';
             }
             document.getElementById('default').selected = true;
+            document.getElementById('rows').disabled = false;
+            document.getElementById('cols').disabled = false;
         }
 
 function generateMatrix() {
+    document.getElementById('rows').disabled = true;
+    document.getElementById('cols').disabled = true;
     var rows = parseInt(document.getElementById('rows').value);
     var cols = parseInt(document.getElementById('cols').value);
     var matrixType1 = document.getElementById('matrix-type').value;
@@ -152,6 +157,7 @@ function generateMatrix() {
                         value = Math.floor(Math.random() * 100);
                 }
                 table += `<td>${value}</td>`;
+                //getFunction(i,j,rows,cols,value);
             } else if (j == 0 && rows == 1) {
                 table += `<td style="border-top: 3px solid white;border-left: 3px solid white; border-bottom: 3px solid white"></td>`;
             } else if (j == cols + 1 && rows == 1) {
@@ -166,8 +172,8 @@ function generateMatrix() {
                 table += `<td style="border-top: 3px solid white;border-right: 3px solid white"></td>`;
             } else if (j == cols + 1 && i == rows - 1) {
                 table += `<td style="border-bottom: 3px solid white;border-right: 3px solid white"></td>`;
-            } else if (j == cols + 1 && i != 0 && j != rows) {
-                table += `<td style="border-right: 3px solid white"></td>`;
+            } else if (j == cols + 1 && i != 0 && j != cols) {
+                table += `<td style="border-right: 3px solid white"></td>`;     
             }
         }
         table += '</tr>';
@@ -176,7 +182,25 @@ function generateMatrix() {
     table += '</table>';
     matrixDiv.innerHTML = table;
 }
-
+/*function getFunction(i,j,rows,cols,value){
+    var equationDiv = document.getElementById('equation');
+    var table;
+    if(j == 1){
+        table += value + "X" + '<sub>' +(j+1) + '</sub>' + " ";
+    }
+    else if (j < cols && j != 0 && j < cols){
+        if(value < 0){
+            table += "- " + value + "X" + '<sub>' +(j+1) + '</sub>' + " ";
+        }
+        else{
+            table += "+ " + value + "X" + '<sub>' +(j+1) + '</sub>' + " ";
+        }
+    }
+    else{
+        table += " = " + value;
+    }
+}
+    */
     </script>
 </body>
 </html>
