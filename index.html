@@ -42,6 +42,7 @@
                     <option value="square-matrix" id="square-matrix">Square Matrix</option>
                     <option value="scalar-matrix" id="scalar-matrix">Scalar Matrix</option>
                     <option value="identity-matrix" id="identity-matrix">Identity Matrix</option>
+                    <option value="diagonal-matrix" id="diagonal-matrix">Diagonal Matrix</option>
                     <option value="upper-matrix" id="upper-matrix">Upper Triangular Matrix</option>
                     <option value="zero-matrix" id="zero-matrix">Zero Matrix</option>
                     <option value="lower-matrix" id="lower-matrix">Lower Triangular Matrix</option>
@@ -74,6 +75,7 @@
                 document.getElementById('square-matrix').style.display = (rows === cols) ? 'block' : 'none';
                 document.getElementById('scalar-matrix').style.display = (rows === cols) ? 'block' : 'none';
                 document.getElementById('identity-matrix').style.display = (rows !== 1 && cols !== 1 && rows == cols) ? 'block' : 'none';
+                document.getElementById('diagonal-matrix').style.display = (rows !== 1 && cols !== 1 && rows == cols) ? 'block' : 'none';
                 document.getElementById('upper-matrix').style.display = (rows !== 1 && cols !== 1 && rows == cols) ? 'block' : 'none';
                 document.getElementById('lower-matrix').style.display = (rows !== 1 && cols !== 1 && rows === cols) ? 'block' : 'none';
                 document.getElementById('zero-matrix').style.display = (rows > 0 && cols > 0) ? 'block' : 'none';
@@ -130,6 +132,13 @@ function generateMatrix() {
                             value = 0;
                         }
                         break;
+                    case 'diagonal-matrix':
+                        if (i + 1 == j) {
+                            value = value = (Math.floor(Math.random() * 201) - 100 || 1);;
+                        } else {
+                            value = 0;
+                        }
+                        break;
                     case 'upper-matrix':
                         if (j < i + 1) {
                             value = 0;
@@ -151,8 +160,6 @@ function generateMatrix() {
                             value = Math.floor(Math.random() * 201) - 100;
                         }
                         break;
-                    default:
-                        value = Math.floor(Math.random() * 100);
                 }
                 table += `<td>${value}</td>`;
                 //getFunction(i,j,rows,cols,value);
