@@ -83,21 +83,23 @@
                     if (j != 0 && j != cols + 1) {
                         switch (matrixType1) {
                             case 'row-matrix':
-                                value = (rows === 1) ? Math.floor(Math.random() * 100) : 0;
+                                value = (rows === 1) ? (Math.floor(Math.random() * 201) - 100) : 0;
                                 break;
                             case 'column-matrix':
-                                value = (cols === 1) ? Math.floor(Math.random() * 100) : 0;
+                                value = (cols === 1) ? (Math.floor(Math.random() * 201) - 100) : 0;
                                 break;
                             case 'rectangular-matrix':
-                                value = Math.floor(Math.random() * 100);
+                                value = (Math.floor(Math.random() * 201) - 100);
                                 break;
                             case 'square-matrix':
-                                value = Math.floor(Math.random() * 100);
+                                value = (Math.floor(Math.random() * 201) - 100);
                                 break;
                             case 'scalar-matrix':
                                 if (i === j - 1) {
                                     if (i === 0) {
-                                        window.scalarValue = Math.floor(Math.random() * 99) + 2;
+                                        do {
+                                            window.scalarValue = (Math.floor(Math.random() * 201) - 100 || 1);
+                                        } while (window.scalarValue == 0);
                                     }
                                     value = window.scalarValue;
                                 } else {
@@ -116,8 +118,11 @@
                                 if (j < i + 1) {
                                     value = 0;
                                 }
+                                else if (i == j - 1) {
+                                    value = (Math.floor(Math.random() * 201) - 100 || 1);
+                                }
                                 else {
-                                    value = Math.floor(Math.random() * 100) + 1;
+                                    value = Math.floor(Math.random() * 201) - 100;
                                 }
                                 break;
                             case 'zero-matrix':
@@ -128,10 +133,10 @@
                                     value = 0;
                                 }
                                 else if (i + 1 == j) {
-                                    value = Math.floor(Math.random() * 100) + 1;
+                                    value = (Math.floor(Math.random() * 201) - 100 || 1);
                                 }
                                 else {
-                                    value = Math.floor(Math.random() * 100);
+                                    value = Math.floor(Math.random() * 201) - 100;
                                 }
                                 break;
                             default:
