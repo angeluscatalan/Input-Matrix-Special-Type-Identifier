@@ -174,11 +174,10 @@ function generateMatrix() {
                         }
                         break;
                     case 'symmetric-matrix':
-                        if (j - 1 >= i) {
+                         if (j - 1 >= i) {
                             value = (Math.floor(Math.random() * 201) - 100);
-                            matrix[i][j - 1] = value;
                         } else {
-                            value = matrix[j - 1][i]; 
+                            value = (Math.floor(Math.random() * 201) - 100) * -1; 
                         }
                         break;
                     default:
