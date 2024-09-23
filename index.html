@@ -16,25 +16,25 @@
                     <div class="letter-container">
                         <h1 class="row">R</h1>
                     </div>
-                    <input onkeyup="matrixTypes()" type="number" id="rows" min="1" placeholder="Enter number of rows">
+                    <input type="number" id="rows" min="1" placeholder="Enter number of rows">
                 </div>
                 <div class="card">
                     <div class="letter-container">
                         <h1 class="row">C</h1>
                     </div>
-                    <input onkeyup="matrixTypes()" type="number" id="cols" min="1" placeholder="Enter number of columns">
+                    <input type="number" id="cols" min="1" placeholder="Enter number of columns">
                 </div>
             </div>
             <br><br>
             <center>
-                <button onclick="matrixTypes()">Matrix Types</button>
+                <button id="reset" onclick="matrixTypes()">Matrix Types</button>
             </center>
         </div>
 
         <div class="special-matrix" id="special-matrix" style="display: none;">
             <h3>Select Special Matrix Type</h3>
             <div class="generate-container">
-                <select id="matrix-type">
+                <select onchange="selected()" id="matrix-type">
                     <option id="default" disabled selected> -- select an option -- </option>
                     <option value="row-matrix" id="row-matrix">Row Matrix</option>
                     <option value="column-matrix" id="column-matrix">Column Matrix</option>
@@ -47,7 +47,7 @@
                     <option value="zero-matrix" id="zero-matrix">Zero Matrix</option>
                     <option value="lower-matrix" id="lower-matrix">Lower Triangular Matrix</option>
                 </select>
-                <button onclick="generateMatrix()">Generate Matrix</button>
+                <button id="generator" onclick="generateMatrix()">Generate Matrix</button>
             </div>
         </div>
         
@@ -67,6 +67,7 @@
             var matrixDiv = document.getElementById('matrix');
             matrixDiv.innerHTML = '';
 
+
             if (rows && cols) {
                 matrixType2.style.display = 'block';
                 document.getElementById('row-matrix').style.display = (rows === 1) ? 'block' : 'none';
@@ -80,9 +81,20 @@
                 document.getElementById('lower-matrix').style.display = (rows !== 1 && cols !== 1 && rows === cols) ? 'block' : 'none';
                 document.getElementById('zero-matrix').style.display = (rows > 0 && cols > 0) ? 'block' : 'none';
             }
-            document.getElementById('default').selected = true;
-            document.getElementById('rows').disabled = false;
-            document.getElementById('cols').disabled = false;
+            if(document.getElementById('reset').innerHTML == "Matrix Types"){
+                document.getElementById('default').selected = true;
+                document.getElementById('rows').disabled = false;
+                document.getElementById('cols').disabled = false;
+                document.getElementById('generator').disabled = true;
+                document.getElementById('reset').innerHTML = "Reset";
+            }
+            else{
+                document.getElementById('rows').value = "";
+                document.getElementById('cols').value = "";
+                matrixType2.style.display = 'none';
+                document.getElementById('reset').innerHTML = "Matrix Types";
+            }
+            
         }
 
 function generateMatrix() {
@@ -160,6 +172,8 @@ function generateMatrix() {
                             value = Math.floor(Math.random() * 201) - 100;
                         }
                         break;
+                    default:
+                        break;
                 }
                 table += `<td>${value}</td>`;
                 //getFunction(i,j,rows,cols,value);
@@ -186,6 +200,12 @@ function generateMatrix() {
 
     table += '</table>';
     matrixDiv.innerHTML = table;
+}
+function selected(){
+    var matrixDiv = document.getElementById('matrix');
+    if(matrixDiv != 'default'){
+        document.getElementById('generator').disabled = false;
+    }
 }
 /*function getFunction(i,j,rows,cols,value){
     var equationDiv = document.getElementById('equation');
