@@ -81,6 +81,7 @@
                 document.getElementById('upper-matrix').style.display = (rows !== 1 && cols !== 1 && rows == cols) ? 'block' : 'none';
                 document.getElementById('lower-matrix').style.display = (rows !== 1 && cols !== 1 && rows === cols) ? 'block' : 'none';
                 document.getElementById('zero-matrix').style.display = (rows > 0 && cols > 0) ? 'block' : 'none';
+                document.getElementById('symmetric-matrix').style.display = (rows === cols) ? 'block' : 'none';
             }
             if(document.getElementById('reset').innerHTML == "Matrix Types"){
                 document.getElementById('default').selected = true;
