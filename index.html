@@ -46,6 +46,7 @@
                     <option value="upper-matrix" id="upper-matrix">Upper Triangular Matrix</option>
                     <option value="zero-matrix" id="zero-matrix">Zero Matrix</option>
                     <option value="lower-matrix" id="lower-matrix">Lower Triangular Matrix</option>
+                     <option value="symmetric-matrix" id="symmetric-matrix">Symmetic Matrix</option>
                 </select>
                 <button id="generator" onclick="generateMatrix()">Generate Matrix</button>
             </div>
@@ -170,6 +171,14 @@ function generateMatrix() {
                             value = (Math.floor(Math.random() * 201) - 100 || 1);
                         } else {
                             value = Math.floor(Math.random() * 201) - 100;
+                        }
+                        break;
+                    case 'symmetric-matrix':
+                        if (j - 1 >= i) {
+                            value = (Math.floor(Math.random() * 201) - 100);
+                            matrix[i][j - 1] = value;
+                        } else {
+                            value = matrix[j - 1][i]; 
                         }
                         break;
                     default:
